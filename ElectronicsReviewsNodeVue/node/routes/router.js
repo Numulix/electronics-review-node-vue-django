@@ -360,4 +360,86 @@ router.delete("/reviews/:id", userMiddleware.isLoggedIn, (req, res) => {
   );
 });
 
+router.put("/categories/:id", userMiddleware.isAdmin, (req, res) => {
+  let { error } = categorySchema.validate(req.body);
+
+  if (error) res.status(400).send(error.details[0].message);
+  else {
+    let query = "UPDATE category SET name=? WHERE id=?";
+    let formatted = mysql.format(query, [req.body.name, req.params.id]);
+
+    db.query(formatted, (err, result) => {
+      if (err) res.status(500).send(err.sqlMessage);
+      else {
+        db.query(
+          `SELECT * FROM category WHERE id=${req.params.id}`,
+          (err, response) => {
+            if (err) res.status(500).send(err.sqlMessage);
+            else res.send(response[0]);
+          }
+        );
+      }
+    });
+  }
+});
+
+router.put("/products/:id", userMiddleware.isAdmin, (req, res) => {
+  let { error } = productSchema.validate(req.body);
+
+  if (error) res.status(400).send(error.details[0].message);
+  else {
+    let query =
+      "UPDATE product SET product_name=?, category_id=?, product_description=?, price=? WHERE id=?";
+    let formatted = mysql.format(query, [req.body.name, req.params.id]);
+
+    db.query(formatted, (err, result) => {
+      if (err) res.status(500).send(err.sqlMessage);
+      else {
+        db.query(
+          `SELECT * FROM product WHERE id=${req.params.id}`,
+          (err, response) => {
+            if (err) res.status(500).send(err.sqlMessage);
+            else res.send(response[0]);
+          }
+        );
+      }
+    });
+  }
+});
+
+router.put("/reviews/:id", userMiddleware.isLoggedIn, (req, res) => {
+  let userId = jwt.verify(req.headers.authorization.split(" ")[1], "SECRETKEY")
+    .userId;
+  db.query(`SELECT * FROM users WHERE id=${userId}`, (err, odg) => {
+    if (err) res.status(500).send(err.sqlMessage);
+    else {
+      db.query(
+        `SELECT * FROM product_review WHERE id=${req.params.id}`,
+        (err, response) => {
+          if (err) res.status(500).send(err.sqlMessage);
+          else {
+            if (odg[0].admin == 1 || response[0].user_id == userId) {
+              db.query(
+                `UPDATE product_review SET review_text='${req.body.review_text}', last_updated=now() WHERE id=${req.params.id}`,
+                (err, odgovor) => {
+                  if (err) res.status(500).send(err.sqlMessage);
+                  else {
+                    db.query(`SELECT * FROM product_review WHERE id=${req.params.id}`, (err, poruka) => {
+                      if (err) res.status(500).send(err.sqlMessage);
+                      else res.send(poruka);
+                    })
+                  }
+                }
+              );
+            } else
+              res.status(403).send({
+                message: "Unauthorized",
+              });
+          }
+        }
+      );
+    }
+  });
+});
+
 module.exports = router;
