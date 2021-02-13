@@ -116,7 +116,9 @@ router.get("/test-auth-route", userMiddleware.isLoggedIn, (req, res, next) => {
 });
 
 router.get("/test-admin-route", userMiddleware.isAdmin, (req, res, next) => {
-    res.send('You are an admin!')
+    res.send({
+      message: "You're an admin!"
+    })
 });
 
 module.exports = router;

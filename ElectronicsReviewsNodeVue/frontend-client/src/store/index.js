@@ -23,6 +23,12 @@ export default new Vuex.Store({
     getUser: (state) => {
       return state.user;
     },
+    isAdmin: (state) => {
+      if (state.user) {
+        return state.user.admin;
+      }
+      return 0;
+    },
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -37,15 +43,15 @@ export default new Vuex.Store({
   },
   actions: {
     login: ({ commit }, { token, user }) => {
-      commit('SET_TOKEN', token);
-      commit('SET_USER', user);
+      commit("SET_TOKEN", token);
+      commit("SET_USER", user);
 
       // set auth header
-      Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      Axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     },
     logout: ({ commit }) => {
-      commit('RESET', '');
-    }
+      commit("RESET", "");
+    },
   },
   modules: {},
 });

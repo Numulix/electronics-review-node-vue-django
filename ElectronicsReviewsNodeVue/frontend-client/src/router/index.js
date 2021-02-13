@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import SignUp from '../views/SignUp.vue'
 import Login from '../views/Login.vue'
+import AdminTest from '../views/AdminTest.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/admin-test',
+    name: 'admin-test',
+    component: AdminTest
   }
 ]
 

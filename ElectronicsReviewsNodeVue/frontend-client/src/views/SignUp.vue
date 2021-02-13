@@ -32,7 +32,6 @@
           ></b-form-input>
         </b-form-group>
 
-        <input type="button" @click="signUp" value="Sign Up" />
         <b-button variant="primary" type="submit">Sign Up</b-button>
       </b-form>
     </div>

@@ -13,9 +13,9 @@ export default {
       .post(url + "sign-up/", credentials)
       .then((response) => response.data);
   },
-  getTestAuthRoute() {
+  getTestAdminRoute() {
     return axios
-      .get(url + "test-auth-route/")
+      .get(url + "test-admin-route/")
       .then((response) => response.data);
   },
 };
