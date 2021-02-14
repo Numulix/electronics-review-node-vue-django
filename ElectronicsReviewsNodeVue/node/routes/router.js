@@ -170,7 +170,7 @@ router.get("/categories", (req, res) => {
 
 router.get("/categories/:id", (req, res) => {
   db.query(
-    `SELECT * FROM product WHERE category_id=${req.body.id}`,
+    `SELECT * FROM product WHERE category_id=${req.params.id}`,
     (err, result) => {
       if (err) res.status(500).send(err.sqlMessage);
       else res.send(result);

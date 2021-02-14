@@ -24,6 +24,17 @@ class ProductService {
         return err;
       });
   }
+
+  get_category_products(id) {
+    return axios
+      .get(API_URL + "categories/" + id)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
 }
 
 export default new ProductService();

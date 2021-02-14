@@ -43,5 +43,8 @@ export default {
       this.$router.push("/");
     },
   },
+  mounted: function() {
+      this.$store.dispatch("products/load_products")
+  }
 };
 </script>

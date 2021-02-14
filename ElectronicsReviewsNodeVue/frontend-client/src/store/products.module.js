@@ -4,6 +4,7 @@ export const products = {
   namespaced: true,
   state: {
     products: [],
+    category_products: [],
   },
   mutations: {
     set_products: (state, products) => {
@@ -23,6 +24,9 @@ export const products = {
     clear_products: (state) => {
       state.products = [];
     },
+    set_category_products: (state, products) => {
+      state.category_products = products;
+    },
   },
   actions: {
     load_products: ({ commit }) => {
@@ -40,6 +44,16 @@ export const products = {
         .then((product) => {
           commit("add_product", product);
           return Promise.resolve(product);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    },
+    load_category_products: ({ commit }, id) => {
+      ProductService.get_category_products(id)
+        .then((products) => {
+          commit("set_category_products", products);
+          return Promise.resolve(products);
         })
         .catch((err) => {
           return Promise.reject(err);
