@@ -14,9 +14,15 @@ class ReviewService {
       });
   }
 
-  get_review_username(user_id) {
+  post_review(review) {
     return axios
-      .get(API_URL + "user/" + user_id)
+      .post(API_URL + "reviews", review)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
   }
 }
 

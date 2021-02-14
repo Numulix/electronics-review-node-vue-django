@@ -13,8 +13,18 @@
             <p><strong>Price: </strong>${{ product[0].price }}</p>
           </b-col>
 
-          <b-col>
-            
+          <b-col align-self="center">
+            <div v-if="!this.$store.getters.isLoggedIn">
+              <h1>You need to login to add a review.</h1>
+            </div>
+            <div v-else class="text-center ">
+              <router-link
+                :to="`/newreview/${product[0].id}`"
+                class="btn btn-primary btn-lg"
+                :id_of_product="product[0].id"
+                >Add a review for this product</router-link
+              >
+            </div>
           </b-col>
         </b-row>
       </b-container>
@@ -38,11 +48,6 @@ import Navbar from "@/components/Navbar.vue";
 import ReviewCard from "@/components/ReviewCard.vue";
 
 export default {
-  data() {
-    return {
-      usertext: "",
-    };
-  },
   computed: {
     product() {
       this.$store.dispatch("products/load_product", this.$route.params.id);

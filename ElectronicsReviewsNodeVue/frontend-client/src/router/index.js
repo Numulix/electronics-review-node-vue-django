@@ -7,6 +7,7 @@ import AdminTest from '../views/AdminTest.vue'
 import Products from '../views/Products.vue'
 import CategoryProducts from '../views/CategoryProducts.vue'
 import ProductInfo from '../views/ProductInfo.vue'
+import NewReview from '../views/NewReview.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/products/:id',
     name: 'product-info',
     component: ProductInfo
+  },
+  {
+    path: '/newreview/:id',
+    name: 'newreview',
+    component: NewReview
   }
 ]
 
