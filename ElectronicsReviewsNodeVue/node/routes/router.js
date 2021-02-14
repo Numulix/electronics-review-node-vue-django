@@ -187,7 +187,7 @@ router.get("/reviews", (req, res) => {
 
 router.get("/reviews/:id", (req, res) => {
   db.query(
-    `SELECT * FROM product_review WHERE product_id=${req.params.id}`,
+    `SELECT product_review.id, product_id, user_id, username, review_text, posted_date, last_updated FROM product_review INNER JOIN users ON product_review.user_id=users.id WHERE product_id=${req.params.id}`,
     (err, result) => {
       if (err) res.status(500).send(err.sqlMessage);
       else res.send(result);
@@ -203,6 +203,13 @@ router.get("/reviews/user/:id", (req, res) => {
       else res.send(result);
     }
   );
+});
+
+router.get("/user/:id", (req, res) => {
+  db.query(`SELECT * FROM users WHERE id=${req.params.id}`, (err, result) => {
+    if (err) res.status(500).send(err.sqlMessage);
+    else res.send(result);
+  });
 });
 
 router.post("/categories", userMiddleware.isAdmin, (req, res) => {

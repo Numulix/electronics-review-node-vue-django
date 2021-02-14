@@ -6,6 +6,7 @@ import Login from '../views/Login.vue'
 import AdminTest from '../views/AdminTest.vue'
 import Products from '../views/Products.vue'
 import CategoryProducts from '../views/CategoryProducts.vue'
+import ProductInfo from '../views/ProductInfo.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/category/:id',
     name: 'category',
     component: CategoryProducts
+  },
+  {
+    path: '/products/:id',
+    name: 'product-info',
+    component: ProductInfo
   }
 ]
 
