@@ -424,10 +424,13 @@ router.put("/reviews/:id", userMiddleware.isLoggedIn, (req, res) => {
                 (err, odgovor) => {
                   if (err) res.status(500).send(err.sqlMessage);
                   else {
-                    db.query(`SELECT * FROM product_review WHERE id=${req.params.id}`, (err, poruka) => {
-                      if (err) res.status(500).send(err.sqlMessage);
-                      else res.send(poruka);
-                    })
+                    db.query(
+                      `SELECT * FROM product_review WHERE id=${req.params.id}`,
+                      (err, poruka) => {
+                        if (err) res.status(500).send(err.sqlMessage);
+                        else res.send(poruka);
+                      }
+                    );
                   }
                 }
               );

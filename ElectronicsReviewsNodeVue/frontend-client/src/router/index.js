@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import SignUp from '../views/SignUp.vue'
 import Login from '../views/Login.vue'
 import AdminTest from '../views/AdminTest.vue'
+import Products from '../views/Products.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/admin-test',
     name: 'admin-test',
     component: AdminTest
+  },
+  {
+    path: '/products',
+    name: 'products',
+    component: Products
   }
 ]
 

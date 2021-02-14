@@ -1,0 +1,29 @@
+import axios from "axios";
+
+const API_URL = "http://localhost:8080/api/";
+
+class ProductService {
+  all_products() {
+    return axios
+      .get(API_URL + "products")
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+
+  get_product(id) {
+    return axios
+      .get(API_URL + "products/" + id)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+}
+
+export default new ProductService();

@@ -3,6 +3,8 @@ import Vuex from "vuex";
 import Axios from "axios";
 import createPersistedState from "vuex-persistedstate";
 
+import { products } from './products.module'
+
 Vue.use(Vuex);
 
 const getDefaultState = () => {
@@ -53,5 +55,7 @@ export default new Vuex.Store({
       commit("RESET", "");
     },
   },
-  modules: {},
+  modules: {
+    products
+  },
 });

@@ -1,13 +1,17 @@
 <template>
   <div>
+      <Navbar/>
+      <br/>
       <h1>Hi {{ this.username }}</h1>
       <p>{{ this.secretMessage }}</p>
       <b-button type="button" variant="primary" @click="logout">Logout</b-button>
+      
   </div>
 </template>
 
 <script>
 import AuthService from "@/services/AuthService.js";
+import Navbar from '@/components/Navbar.vue'
 
 export default {
   data() {
@@ -34,6 +38,9 @@ export default {
       this.$router.push("/login");
     },
   },
+  components: {
+    Navbar
+  }
 };
 </script>
 
