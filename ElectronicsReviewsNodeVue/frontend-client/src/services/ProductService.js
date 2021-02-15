@@ -14,6 +14,17 @@ class ProductService {
       });
   }
 
+  post_product(product) {
+    return axios
+      .post(API_URL + "products", product)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+
   get_product(id) {
     return axios
       .get(API_URL + "products/" + id)

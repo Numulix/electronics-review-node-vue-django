@@ -1,5 +1,6 @@
 import ProductService from "../services/ProductService.js";
 import ReviewService from "../services/ReviewService.js";
+import CategoryService from "../services/CategoryService.js";
 
 export const products = {
   namespaced: true,
@@ -7,6 +8,7 @@ export const products = {
     products: [],
     category_products: [],
     reviews: [],
+    categories: [],
   },
   mutations: {
     set_products: (state, products) => {
@@ -34,6 +36,12 @@ export const products = {
     },
     clear_reviews: (state) => {
       state.reviews = [];
+    },
+    set_categories: (state, categories) => {
+      state.categories = categories;
+    },
+    add_category: (state, category) => {
+      state.categories.push(category);
     },
   },
   actions: {
@@ -74,6 +82,16 @@ export const products = {
           commit("clear_reviews", "");
           commit("set_reviews", reviews);
           return Promise.resolve(reviews);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    },
+    load_categories: ({ commit }) => {
+      CategoryService.all_categories()
+        .then((categories) => {
+          commit("set_categories", categories);
+          return Promise.resolve(categories);
         })
         .catch((err) => {
           return Promise.reject(err);
