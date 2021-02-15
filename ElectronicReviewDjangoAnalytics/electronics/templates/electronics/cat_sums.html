@@ -1,0 +1,42 @@
+{% extends 'electronics/index.html' %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function() {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: [{% for category in categories %}'{{ category.name }}',{% endfor %}],
+                datasets: [{
+                    label: '# of Products',
+                    data: [{% for sum_num in sums %}{{ sum_num }},{% endfor %}],
+                    backgroundColor: [{% for color in colors %}
+                        'rgba({{ color }}, 0.2)',
+                    {% endfor %}
+                    ],
+                    borderColor: [
+                        {% for color in colors %}
+                        'rgba({{ color }}, 1)',
+                    {% endfor %}
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+</script>
+{% endblock scripts %}
+
+{% block content %}
+<canvas id="myChart" width="150" height="80"></canvas>
+{% endblock content %}
