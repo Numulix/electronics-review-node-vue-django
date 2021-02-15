@@ -43,6 +43,9 @@ export const products = {
     add_category: (state, category) => {
       state.categories.push(category);
     },
+    add_review: (state, review) => {
+      state.reviews.push(review);
+    },
   },
   actions: {
     load_products: ({ commit }) => {
@@ -92,6 +95,17 @@ export const products = {
         .then((categories) => {
           commit("set_categories", categories);
           return Promise.resolve(categories);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
+    },
+    load_current_editing_review: ({ commit }, id) => {
+      ReviewService.get_review(id)
+        .then((review) => {
+          commit("clear_reviews", "");
+          commit("add_review", review);
+          return Promise.resolve(review);
         })
         .catch((err) => {
           return Promise.reject(err);

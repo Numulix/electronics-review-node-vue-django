@@ -8,6 +8,7 @@ import Products from '../views/Products.vue'
 import CategoryProducts from '../views/CategoryProducts.vue'
 import ProductInfo from '../views/ProductInfo.vue'
 import NewReview from '../views/NewReview.vue'
+import EditReview from '../views/EditReview.vue'
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/newreview/:id',
     name: 'newreview',
     component: NewReview
+  },
+  {
+    path: '/editreview/:id',
+    name: 'editreview',
+    component: EditReview
   }
 ]
 

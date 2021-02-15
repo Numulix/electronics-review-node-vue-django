@@ -24,6 +24,39 @@ class ReviewService {
         return err;
       });
   }
+
+  delete_review(id) {
+    return axios
+      .delete(API_URL + "reviews/" + id)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+
+  get_review(id) {
+    return axios
+      .get(API_URL + "review_info/" + id)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+
+  update_review(id, data) {
+    return axios
+      .put(API_URL + "reviews/" + id, data)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
 }
 
 export default new ReviewService();

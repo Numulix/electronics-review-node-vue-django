@@ -195,6 +195,16 @@ router.get("/reviews/:id", (req, res) => {
   );
 });
 
+router.get("/review_info/:id", (req, res) => {
+  db.query(
+    `SELECT * FROM product_review WHERE id=${req.params.id}`,
+    (err, result) => {
+      if (err) res.status(500).send(err.sqlMessage);
+      else res.send(result);
+    }
+  );
+});
+
 router.get("/reviews/user/:id", (req, res) => {
   db.query(
     `SELECT * FROM product_review WHERE user_id=${req.params.id}`,

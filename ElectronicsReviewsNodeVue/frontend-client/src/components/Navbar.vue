@@ -10,6 +10,7 @@
             <b-dropdown-item :href="`/category/${category.id}`">{{ category.name }}</b-dropdown-item>
           </div>
         </b-nav-item-dropdown>
+        <b-nav-item v-if="this.$store.getters.isAdmin" href="/admin-test">Admin forms</b-nav-item>
       </b-navbar-nav>
     </b-navbar>
   </div>

@@ -9,21 +9,21 @@
       >
     </div>
     <div v-else>
-      <h1 class="text-center">REVIEW:</h1>
-      <div v-if="this.rev_err">
-        <b-alert show variant="danger">{{ this.rev_err }}</b-alert>
+      <h1 class="text-center">EDIT REVIEW:</h1>
+      <div v-if="this.edit_rev_err">
+        <b-alert show variant="danger">{{ this.edit_rev_err }}</b-alert>
       </div>
-      <b-form @submit="onSubmit">
+      <b-form @submit="editReview">
         <b-form-group label="Review text">
           <b-form-textarea
-            v-model="text"
+            v-model="edit_text"
             placeholder="Leave your review here"
             required
           >
           </b-form-textarea>
         </b-form-group>
 
-        <b-button variant="primary" type="submit">Submit</b-button>
+        <b-button variant="primary" type="submit">Edit</b-button>
       </b-form>
     </div>
   </div>
@@ -34,7 +34,7 @@ import Navbar from "@/components/Navbar.vue";
 import ReviewService from "@/services/ReviewService.js";
 import Joi from "joi";
 
-const reviewSchema = Joi.object().keys({
+const editReviewSchema = Joi.object().keys({
   review_text: Joi.string()
     .min(5)
     .max(1024)
@@ -44,38 +44,43 @@ const reviewSchema = Joi.object().keys({
         "You must include your review description, max 1024 min 5 characters"
       )
     ),
-  user_id: Joi.number().integer().required(),
-  product_id: Joi.number().integer().required(),
-});
+})
 
 export default {
   data() {
     return {
-      text: "",
-      rev_err: "",
+      edit_text: "",
+      product_id: this.$store.state.products.reviews[0].product_id,
+      edit_rev_err: "",
     };
   },
   components: {
     Navbar,
   },
+  computed: {
+    review() {
+      this.$store.dispatch(
+        "products/load_current_editing_review",
+        this.$route.params.id
+      );
+      return this.$store.state.products.reviews[0];
+    },
+  },
   methods: {
-    onSubmit(e) {
+    editReview(e) {
       e.preventDefault();
-      const request = {
-        user_id: this.$store.getters.getUser.id,
-        product_id: this.$route.params.id,
-        review_text: this.text,
+      let data = {
+        review_text: this.edit_text,
       };
 
-      let { error } = reviewSchema.validate(request);
+      let { error } = editReviewSchema.validate(data);
       if (error) {
-        this.rev_err = error;
+        this.edit_rev_err = error;
         return;
       }
 
-      console.log(request);
-      ReviewService.post_review(request);
-      this.$router.push(`/products/${this.$route.params.id}`);
+      ReviewService.update_review(this.$route.params.id, data);
+      this.$router.push(`/products/${this.product_id}`);
     },
   },
 };
