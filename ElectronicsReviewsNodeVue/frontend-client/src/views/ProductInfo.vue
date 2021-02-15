@@ -25,6 +25,11 @@
                 >Add a review for this product</router-link
               >
             </div>
+            <div class="text-center">
+              <b-form @submit="deleteProduct">
+                <b-button type="submit" v-if="this.$store.getters.isAdmin">Delete</b-button>
+              </b-form>
+            </div>
           </b-col>
         </b-row>
       </b-container>
@@ -46,6 +51,7 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import ReviewCard from "@/components/ReviewCard.vue";
+import ProductService from "@/services/ProductService.js"
 
 export default {
   computed: {
@@ -66,7 +72,13 @@ export default {
     Navbar,
     ReviewCard,
   },
-  methods: {},
+  methods: {
+    deleteProduct(e) {
+      e.preventDefault();
+      ProductService.delete_product(this.$route.params.id);
+      this.$router.push("/");
+    }
+  },
 };
 </script>
 

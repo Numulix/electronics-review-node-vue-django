@@ -25,6 +25,17 @@ class ProductService {
       });
   }
 
+  delete_product(id) {
+    return axios
+      .delete(API_URL + "products/" + id)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err;
+      });
+  }
+
   get_product(id) {
     return axios
       .get(API_URL + "products/" + id)
