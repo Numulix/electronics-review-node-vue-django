@@ -36,9 +36,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'electronics:add-product' %}">Add a Product</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'electronics:list-data' %}">List Data</a>
+                </li>
             </ul>
         </div>
     </nav>
+
+    
 
     <div class="container">
         {% block content %}

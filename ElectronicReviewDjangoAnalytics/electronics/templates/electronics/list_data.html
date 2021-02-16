@@ -1,0 +1,47 @@
+{% extends 'electronics/index.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Category name</th>
+                    <th colspan="2"></th>
+                </tr>
+            <thead>
+
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td>{{ category.name }}</td>
+                    <td><a href="{% url 'electronics:edit_category' category.id %}">Edit</a></td>
+                    <td><a href="{% url 'electronics:delete_category' category.id %}" onclick="return confirm('Are you sure you want to delete this category?');">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Product name</th>
+                    <th colspan="2"></th>
+                </tr>
+            <thead>
+
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.product_name }}</td>
+                    <td><a href="{% url 'electronics:edit_product' product.id %}">Edit</a></td>
+                    <td><a href="{% url 'electronics:delete_product' product.id %}" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

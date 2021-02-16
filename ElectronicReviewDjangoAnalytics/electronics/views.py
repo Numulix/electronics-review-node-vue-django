@@ -117,3 +117,22 @@ def edit_product(request, id):
     else:
         form = ProductForm(instance=prod)
     return render(request, 'electronics/add_product.html', { 'form': form, 'controller': 'Edit Product' })
+
+
+def list_data(request):
+    categories = Category.objects.all()
+    products = Product.objects.all()
+    return render(request, 'electronics/list_data.html', { 'categories': categories, 'products': products })
+
+
+def delete_category(request, id):
+    category = get_object_or_404(Category, pk=id)
+    category.delete()
+    return redirect('electronics:list-data')
+
+
+
+def delete_product(request, id):
+    product = get_object_or_404(Product, pk=id)
+    product.delete()
+    return redirect('electronics:list-data')
