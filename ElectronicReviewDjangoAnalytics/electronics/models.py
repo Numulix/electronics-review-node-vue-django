@@ -12,6 +12,9 @@ class Category(models.Model):
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=64)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         managed = False
         db_table = 'category'

@@ -61,3 +61,59 @@ def top_reviewed_products(request):
 def table_products(request):
     products = Product.objects.all()
     return render(request, 'electronics/product_table.html', { 'products': products })
+
+
+def add_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST or None)
+
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            return redirect('electronics:home')
+    else:
+        form = CategoryForm()
+    return render(request, 'electronics/add_category.html', { 'form': form, 'controller': 'Add Category' })
+
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST or None)
+
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            return redirect('electronics:home')
+    else:
+        form = ProductForm()
+    return render(request, 'electronics/add_product.html', { 'form': form, 'controller': 'Add Product' })
+
+
+def edit_category(request, id):
+    cat = get_object_or_404(Category, pk=id)
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST or None, instance=cat)
+
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            return redirect('electronics:home')
+    else:
+        form = CategoryForm(instance=cat)
+    return render(request, 'electronics/add_category.html', { 'form': form, 'controller': 'Edit Category' })
+
+
+def edit_product(request, id):
+    prod = get_object_or_404(Product, pk=id)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST or None, instance=prod)
+
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.save()
+            return redirect('electronics:home')
+    else:
+        form = ProductForm(instance=prod)
+    return render(request, 'electronics/add_product.html', { 'form': form, 'controller': 'Edit Product' })

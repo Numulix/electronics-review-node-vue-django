@@ -31,10 +31,10 @@
             <a class="navbar-brand" href="{% url 'electronics:home' %}">Homepage</a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Add a Category</a>
+                    <a class="nav-link" href="{% url 'electronics:add-category' %}">Add a Category</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Add a Product</a>
+                    <a class="nav-link" href="{% url 'electronics:add-product' %}">Add a Product</a>
                 </li>
             </ul>
         </div>
@@ -48,6 +48,7 @@
             <a class="btn btn-primary" href="{% url 'electronics:category-sums' %}">All category prices</a>
             <a class="btn btn-primary" href="{% url 'electronics:top-reviewers' %}">Top Reviewers</a>
             <a class="btn btn-primary" href="{% url 'electronics:top-reviewed-products' %}">Top Reviewed Products</a>
+            <a class="btn btn-primary" href="{% url 'electronics:product-table' %}">Products Table</a>
         </div>
     </div>
 
