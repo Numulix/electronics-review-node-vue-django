@@ -5,14 +5,14 @@
     $(document).ready(function() {
         var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'bar',
+            type: 'polarArea',
             data: {
-                labels: [{% for category in categories %}'{{ category.name }}',{% endfor %}],
+                labels: [{% for product in products %}'{{ product.product_name }}',{% endfor %}],
                 datasets: [{
                     label: '# of Products',
-                    data: [{% for product_num in num_of_products %}{{ product_num }},{% endfor %}],
+                    data: [{% for rev in prod_review_count %}{{ rev }},{% endfor %}],
                     backgroundColor: [{% for color in colors %}
-                        'rgba({{ color }}, 0.5)',
+                        'rgba({{ color }}, 0.8)',
                     {% endfor %}
                     ],
                     borderColor: [

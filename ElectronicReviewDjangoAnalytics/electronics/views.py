@@ -43,3 +43,21 @@ def top_reviewers(request):
     return render(request, 'electronics/top_reviewers.html', { 'users': users,
                                                                'user_reviews': sorted(user_reviews, reverse=True),
                                                                'colors': colors })
+
+
+def top_reviewed_products(request):
+    products = Product.objects.all()[:10]
+    prod_review_count = []
+    colors = []
+    for p in products:
+        prod_review_count.append(p.productreview_set.count())
+        colors.append(f'{randint(0, 256)}, {randint(0, 256)}, {randint(0, 256)}')
+    products = [x for _, x in sorted(zip(prod_review_count, products), key=lambda pair: pair[0], reverse=True)]
+    return render(request, 'electronics/product_reviews.html', { 'products': products,
+                                                                 'prod_review_count': sorted(prod_review_count, reverse=True),
+                                                                 'colors': colors })
+
+
+def table_products(request):
+    products = Product.objects.all()
+    return render(request, 'electronics/product_table.html', { 'products': products })

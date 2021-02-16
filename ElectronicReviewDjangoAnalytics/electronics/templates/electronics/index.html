@@ -7,6 +7,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
+
     <!-- semantic UI -->
     <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
     <!--Chart js-->
@@ -14,6 +15,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.23/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.23/datatables.min.js"></script>
 
     <title>Electronics analytics</title>
 </head>
@@ -42,6 +47,7 @@
         <div class="text-center">
             <a class="btn btn-primary" href="{% url 'electronics:category-sums' %}">All category prices</a>
             <a class="btn btn-primary" href="{% url 'electronics:top-reviewers' %}">Top Reviewers</a>
+            <a class="btn btn-primary" href="{% url 'electronics:top-reviewed-products' %}">Top Reviewed Products</a>
         </div>
     </div>
 

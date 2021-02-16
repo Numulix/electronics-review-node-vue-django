@@ -1,0 +1,26 @@
+{% extends 'electronics/index.html' %}
+
+{% block scripts %}
+<script>
+    var dataSet = [{% for product in products %}
+        ["{{ product.category.name }}", "{{ product.product_name }}", "${{ product.price }}"],
+    {% endfor %}
+    ]
+
+    $(document).ready(function() {
+        $('#prodTable').DataTable( {
+            data: dataSet,
+            columns: [
+                {   title: "Category" },
+                {   title: "Product Name" },
+                {   title: "Price"  }
+            ]
+        }  );
+    }  );
+</script>
+{% endblock scripts %}
+
+{% block content %}
+<br/>
+<table id="prodTable" class="display" height="500" width="100%"></table>
+{% endblock content %}
